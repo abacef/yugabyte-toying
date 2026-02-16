@@ -32,8 +32,6 @@ metadata:
 spec:
   clusterIP: None
   ports:
-  - name: ui
-    port: 7000
   - name: rpc-port
     port: 7100
   selector:
@@ -98,14 +96,10 @@ spec:
           - "--use_private_ip=never"
           # FQDNs of each master. Update this in case your desired RF != 3.
           - "--master_addresses=yb-master-0.yb-masters.$(NAMESPACE).svc.cluster.local:7100,yb-master-1.yb-masters.$(NAMESPACE).svc.cluster.local:7100,yb-master-2.yb-masters.$(NAMESPACE).svc.cluster.local:7100"
-          # To disable YugaByte SQL API functionality, set the
-          # "enable_ysql" flag to false. Flag supported after 2.0
           - "--enable_ysql=true"
           - "--replication_factor=3"
           - "--logtostderr"
         ports:
-        - containerPort: 7000
-          name: master-ui
         - containerPort: 7100
           name: master-rpc
 
